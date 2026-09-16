@@ -1,101 +1,92 @@
 @charset "utf-8";
 
-/* ============================================================
-   The Great Lakescape Lodge - Layout Style Sheet
-   Author: Tongcheng Bi      Date: 2026-09-16
-   Course: 158.256 Web Application Design - Lab 2
-   Purpose: Defines the page structure (Flexbox + Grid Layout).
-   ============================================================ */
+/*
+   New Perspectives on HTML5 and CSS3, 7th Edition
+   Tutorial 2
+   Case Problem 4
+   
+   The Great Lakescape Lodge Layout Styles
+   Filename: lake_layout.css
 
-/* ---------- 1. Global layout reset ---------- */
-* {
-    box-sizing: border-box;          /* include padding/border in widths */
-}
+   Updated by Tongcheng Bi (2026-09-16): the page skeleton is now
+   arranged with CSS Grid and Flexbox instead of floats (Task 3.j).
+*/
 
-/* ---------- 2. Page skeleton: CSS Grid template areas ---------- */
+
+/* Structural Styles */
+
 body {
-    display: grid;                   /* overall page uses CSS Grid */
-    grid-template-areas:
-        "header"
-        "page"
-        "footer";
-    grid-template-columns: 1fr;
-    max-width: 1100px;               /* keeps the page centred */
-    margin: 0 auto;                  /* horizontal auto margins */
-    padding: 0;
+	margin: 0 auto;
+	width: 100%;
+	max-width: 1020px;
+	min-width: 640px;
+
+	/* Task 3.j: CSS Grid - the page skeleton uses named grid areas */
+	display: grid;
+	grid-template-areas:
+		"header   header"
+		"leftcol  rightcol"
+		"footer   footer";
+	grid-template-columns: 70% 24%;   /* main column + sidebar column */
+	column-gap: 6%;                   /* 70% + 24% + 6% gap = 100% */
 }
 
-header#top    { grid-area: header; }
-div#page      { grid-area: page; }
-footer#footer { grid-area: footer; }
+body > header            { grid-area: header; }
+body > section#leftcol   { grid-area: leftcol; }
+body > section#rightcol  { grid-area: rightcol; }
+footer                   { grid-area: footer; }
 
-/* ---------- 3. Main + sidebar: two-column Grid ---------- */
-#page {
-    display: grid;
-    grid-template-columns: 2fr 1fr;  /* main is twice as wide as the sidebar */
-    gap: 1.5rem;                     /* gutter between the two columns */
-    padding: 1.5rem 2rem;
+body > header > img {
+	width: 100%;
+	display: block;
+	margin: 0;
 }
 
-/* ---------- 4. Navigation: horizontal Flexbox ---------- */
-nav ul {
-    display: flex;                   /* nav links laid out with Flexbox */
-    flex-flow: row wrap;
-    justify-content: space-around;
-    align-items: center;
-    list-style-type: none;
-    margin: 0;
-    padding: 0.4rem 1rem;
+/* Header Navigation - Task 3.j: Flexbox lays out the menu items */
+header > nav {
+	display: flex;                    /* flex container */
+	width: 100%;
 }
 
-nav li {
-    flex: 1 1 auto;                  /* links share the available width */
-    text-align: center;
+header > nav > ul {
+	display: flex;                    /* flex row of menu items */
+	flex: 1 1 auto;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
 
-/* ---------- 5. News block: side-by-side Notes + Events ---------- */
-#news {
-    display: flex;                   /* Flexbox for the two news panels */
-    flex-flow: row wrap;
-    gap: 1.5rem;
-    margin-top: 2rem;
+header > nav > ul > li {
+	flex: 1 1 auto;                   /* each item shares the width */
+	text-align: center;
 }
 
-#news > section {
-    flex: 1 1 280px;                 /* panels shrink/wrap on small screens */
+header > nav a {
+	display: block;
+	width: 100%;
 }
 
-/* ---------- 6. Welcome photo sizing ---------- */
-#welcome img {
-    width: 100%;                     /* image fills its grid column */
-    max-width: 640px;
-    height: auto;                    /* keeps the original aspect ratio */
+
+/* Section Layout - Task 3.j: Grid places the two aside panels */
+section#leftcol {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);   /* Notes + Events side by side */
+	column-gap: 4%;
+	align-content: start;
 }
 
-/* ---------- 7. Sidebar panel spacing ---------- */
-#sidebar {
-    padding: 0 0.25rem;
+/* Full-width items inside the left column */
+section#leftcol > h1,
+section#leftcol > img,
+section#leftcol > p {
+	grid-column: 1 / -1;              /* span both grid columns */
 }
 
-#sidebar .links {
-    padding: 1rem 1.25rem;           /* padding around each link panel */
-    margin: 0 0 1.25rem 0;           /* margin below each panel */
+section#leftcol > img {
+	width: 100%;
+	display: block;
 }
 
-#sidebar blockquote {
-    margin: 1.25rem 0.5rem;          /* margins around the testimonial */
-    padding: 1rem 1.25rem;
-}
-
-/* ---------- 8. Footer layout ---------- */
-footer {
-    padding: 1.25rem 1rem;
-}
-
-footer p {
-    display: flex;                   /* Flexbox keeps footer items tidy */
-    flex-flow: row wrap;
-    justify-content: center;
-    gap: 0.5rem 1rem;
-    margin: 0;
+section#leftcol > aside {
+	grid-row: auto;
 }
