@@ -1,0 +1,101 @@
+@charset "utf-8";
+
+/* ============================================================
+   The Great Lakescape Lodge - Layout Style Sheet
+   Author: Tongcheng Bi      Date: 2026-09-16
+   Course: 158.256 Web Application Design - Lab 2
+   Purpose: Defines the page structure (Flexbox + Grid Layout).
+   ============================================================ */
+
+/* ---------- 1. Global layout reset ---------- */
+* {
+    box-sizing: border-box;          /* include padding/border in widths */
+}
+
+/* ---------- 2. Page skeleton: CSS Grid template areas ---------- */
+body {
+    display: grid;                   /* overall page uses CSS Grid */
+    grid-template-areas:
+        "header"
+        "page"
+        "footer";
+    grid-template-columns: 1fr;
+    max-width: 1100px;               /* keeps the page centred */
+    margin: 0 auto;                  /* horizontal auto margins */
+    padding: 0;
+}
+
+header#top    { grid-area: header; }
+div#page      { grid-area: page; }
+footer#footer { grid-area: footer; }
+
+/* ---------- 3. Main + sidebar: two-column Grid ---------- */
+#page {
+    display: grid;
+    grid-template-columns: 2fr 1fr;  /* main is twice as wide as the sidebar */
+    gap: 1.5rem;                     /* gutter between the two columns */
+    padding: 1.5rem 2rem;
+}
+
+/* ---------- 4. Navigation: horizontal Flexbox ---------- */
+nav ul {
+    display: flex;                   /* nav links laid out with Flexbox */
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0.4rem 1rem;
+}
+
+nav li {
+    flex: 1 1 auto;                  /* links share the available width */
+    text-align: center;
+}
+
+/* ---------- 5. News block: side-by-side Notes + Events ---------- */
+#news {
+    display: flex;                   /* Flexbox for the two news panels */
+    flex-flow: row wrap;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+#news > section {
+    flex: 1 1 280px;                 /* panels shrink/wrap on small screens */
+}
+
+/* ---------- 6. Welcome photo sizing ---------- */
+#welcome img {
+    width: 100%;                     /* image fills its grid column */
+    max-width: 640px;
+    height: auto;                    /* keeps the original aspect ratio */
+}
+
+/* ---------- 7. Sidebar panel spacing ---------- */
+#sidebar {
+    padding: 0 0.25rem;
+}
+
+#sidebar .links {
+    padding: 1rem 1.25rem;           /* padding around each link panel */
+    margin: 0 0 1.25rem 0;           /* margin below each panel */
+}
+
+#sidebar blockquote {
+    margin: 1.25rem 0.5rem;          /* margins around the testimonial */
+    padding: 1rem 1.25rem;
+}
+
+/* ---------- 8. Footer layout ---------- */
+footer {
+    padding: 1.25rem 1rem;
+}
+
+footer p {
+    display: flex;                   /* Flexbox keeps footer items tidy */
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+    margin: 0;
+}

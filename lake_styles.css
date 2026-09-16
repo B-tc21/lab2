@@ -1,0 +1,338 @@
+@charset "utf-8";
+
+/* ============================================================
+   The Great Lakescape Lodge - Colour & Typography Style Sheet
+   Author: Tongcheng Bi      Date: 2026-09-16
+   Course: 158.256 Web Application Design - Lab 2
+   ------------------------------------------------------------
+   Task 3.a: this file starts with @charset "utf-8"; which
+   defines the character encoding used by the style sheet.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Task 3.b: Web fonts via @font-face.
+   Two font families are supplied locally as BOTH .woff and .ttf
+   files: "Playfair Display" (serif, used for headings) and
+   "Lato" (sans-serif, used for body text). Browsers download
+   the first format they support.
+   ------------------------------------------------------------ */
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('fonts/PlayfairDisplay-Regular.woff') format('woff'),
+         url('fonts/PlayfairDisplay-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('fonts/PlayfairDisplay-Bold.woff') format('woff'),
+         url('fonts/PlayfairDisplay-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url('fonts/Lato-Regular.woff') format('woff'),
+         url('fonts/Lato-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url('fonts/Lato-Bold.woff') format('woff'),
+         url('fonts/Lato-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* ------------------------------------------------------------
+   Task 3.c: background and text colours.
+   The scheme mixes colour VALUES (hex, rgb, rgba) and colour
+   NAMES (purple, black, white, tan) on purpose.
+   ------------------------------------------------------------ */
+
+/* Root colour palette stored as custom properties */
+:root {
+    --lodge-purple: #5b2d6e;        /* deep purple - main brand colour */
+    --lodge-purple-dark: #2e1738;   /* very dark purple - header/footer */
+    --lodge-tan: #d9c4a3;           /* light tan - page background      */
+    --lodge-cream: #faf5ea;         /* cream - content panels           */
+    --lodge-gold: #b0781c;          /* gold-brown - accents/markers     */
+    --lodge-ink: #2b2118;           /* dark brown - body text           */
+}
+
+/* Whole page: tan background + dark-brown text */
+body {
+    background-color: var(--lodge-tan);   /* colour value (hex) */
+    color: var(--lodge-ink);              /* colour value (hex) */
+    font-family: 'Lato', sans-serif;      /* web font (Task 3.b) */
+    line-height: 1.7;
+}
+
+/* ============================================================
+   HEADER & NAVIGATION
+   ============================================================ */
+
+/* Header: purple colour NAME, with a subtle semi-transparent
+   gold line beneath it (Task 3.d shows rgba colours). */
+header#top {
+    background-color: purple;              /* colour name */
+    background-image: linear-gradient(rgba(255,255,255,0.12), rgba(0,0,0,0.25));
+    border-bottom: 4px solid rgba(176,120,28,0.85);   /* semi-transparent gold */
+    color: white;                          /* colour name */
+    padding: 1.6rem 2rem 0.6rem;           /* Task 3.h: padding */
+    text-align: center;
+}
+
+/* Header title: elegant serif web font (Task 3.b) */
+header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.9rem;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    margin: 0;                             /* Task 3.h: margin */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.55);   /* semi-transparent shadow */
+}
+
+/* Task 3.e: child-element selector - direct li children of nav>ul */
+nav > ul > li > a {
+    color: tan;                            /* colour name */
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    padding: 0.55rem 0.9rem;               /* Task 3.h: padding */
+    border-radius: 4px;
+}
+
+/* Task 3.g: pseudo-classes on the navigation links */
+nav a:link    { color: tan; }              /* unvisited link  */
+nav a:visited { color: #e6d9bf; }          /* visited link    */
+nav a:hover {
+    color: white;
+    background-color: rgba(91, 45, 110, 0.9);   /* Task 3.d: semi-transparent colour */
+    border-radius: 4px;
+}
+nav a:active  { color: var(--lodge-gold); }
+nav a:focus   { outline: 2px solid var(--lodge-gold); }
+
+/* Task 3.i: generate content - a gold dot appears before
+   every navigation link in the rendered page. */
+nav a::before {
+    content: "\25CF ";                     /* "●" generated content */
+    color: var(--lodge-gold);
+    font-size: 0.7em;
+}
+
+/* Task 3.f: list marker control - navigation list shows no
+   bullets at all (list-style-type: none). */
+nav ul {
+    list-style-type: none;
+    margin: 0.4rem 0 0 0;
+    padding: 0;                            /* remove default padding */
+}
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+
+/* Task 3.e: id selector - the main content column */
+#main {
+    background-color: var(--lodge-cream);  /* cream panel */
+    border: 1px solid #cdb58d;
+    border-radius: 6px;
+    padding: 1.6rem 1.9rem;                /* Task 3.h: padding */
+}
+
+/* Task 3.e: nested-element selector - every paragraph that is
+   a descendant of the #welcome section */
+#welcome p {
+    margin: 0.8rem 0 0 0;                  /* Task 3.h: margins */
+    text-align: justify;
+}
+
+/* Task 3.g: pseudo-element - drop cap on the first letter of
+   the first welcome paragraph */
+#welcome p:first-of-type::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    color: var(--lodge-purple);
+    float: left;
+    line-height: 0.85;
+    padding-right: 0.35rem;
+}
+
+/* Task 3.g: pseudo-element - gold rule generated under headings */
+h2::after {
+    content: "";                           /* generated empty box */
+    display: block;
+    width: 4rem;
+    height: 3px;
+    background-color: var(--lodge-gold);
+    margin-top: 0.3rem;
+}
+
+/* Welcome photo: rounded corners + a soft semi-transparent frame */
+#welcome img {
+    border-radius: 6px;
+    border: 1px solid rgba(91, 45, 110, 0.35);   /* Task 3.d: rgba */
+    margin: 1rem 0 0.4rem 0;
+}
+
+/* ============================================================
+   NOTES & EVENTS  (Flexbox / Grid usage - Task 3.j)
+   ============================================================ */
+
+/* Notes panel: nested list gets custom markers
+   (Task 3.f: list-style-image replaces the default bullets) */
+#notes ul {
+    list-style-image: url('images/bullet.png');  /* custom marker image */
+    padding-left: 1.8rem;                        /* room for the marker */
+    margin: 0.4rem 0 0 0;
+}
+
+#notes li {
+    margin-bottom: 0.5rem;
+}
+
+/* Events panel: CSS Grid places the two events side by side */
+#events {
+    display: grid;                           /* Task 3.j: Grid Layout */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 0.4rem;
+}
+
+/* Task 3.e: child-element selector - article.event is a direct
+   child of the #events section */
+#events > .event {
+    background-color: rgba(217, 196, 163, 0.55);  /* Task 3.d: semi-transparent tan */
+    border-left: 4px solid var(--lodge-gold);
+    border-radius: 4px;
+    padding: 0.7rem 0.9rem;                        /* Task 3.h: padding */
+}
+
+/* Task 3.f: description-list style variation - event titles
+   get a numbered look through counters */
+#events h3 {
+    margin: 0 0 0.35rem 0;
+    color: var(--lodge-purple-dark);
+}
+
+/* Task 3.g: pseudo-class - alternating background for events */
+.event:nth-child(odd)  { background-color: rgba(217, 196, 163, 0.55); }
+.event:nth-child(even) { background-color: rgba(91, 45, 110, 0.12); }
+
+/* Task 3.g: pseudo-element - first line of each event paragraph
+   is styled slightly differently */
+.event p::first-line {
+    font-weight: bold;
+    color: var(--lodge-purple-dark);
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+
+/* Task 3.e: id selector - the right-hand sidebar */
+#sidebar .links {
+    background-color: rgba(91, 45, 110, 0.14);  /* Task 3.d: semi-transparent purple */
+    border-radius: 6px;
+    color: var(--lodge-ink);
+}
+
+/* Sidebar headings: small caps with generated ornament */
+#sidebar h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--lodge-purple);
+    letter-spacing: 0.05em;
+}
+
+/* Task 3.i: generate an ornament before sidebar headings */
+#sidebar .links h2::before {
+    content: "\2766";                     /* "❦" fleuron generated content */
+    color: var(--lodge-gold);
+    margin-right: 0.4rem;
+}
+
+/* Task 3.f: nested list - sidebar links without bullets */
+#sidebar ul {
+    list-style-type: none;                /* no markers */
+    padding-left: 0;
+    margin: 0.3rem 0 0 0;
+}
+
+/* Task 3.e: nested-element selector - links inside sidebar lists */
+#sidebar ul li a {
+    display: block;
+    color: var(--lodge-ink);
+    text-decoration: none;
+    padding: 0.28rem 0.4rem;              /* Task 3.h: padding */
+    border-radius: 3px;
+}
+
+/* Task 3.g: pseudo-classes for sidebar links */
+#sidebar ul li a:hover {
+    background-color: var(--lodge-purple);
+    color: white;
+    padding-left: 1rem;                   /* indent on hover */
+}
+#sidebar li:first-child a { border-top: none; }
+#sidebar li:last-child  a { border-bottom: 1px dashed rgba(91,45,110,0.3); }
+
+/* Testimonial quote: semi-transparent background + big quote
+   mark generated with the ::before pseudo-element (Task 3.i) */
+#testimonial {
+    background-color: rgba(46, 23, 56, 0.82);   /* Task 3.d: semi-transparent dark purple */
+    color: #f0e6d2;
+    border-radius: 6px;
+    font-style: italic;
+    font-size: 0.92rem;
+}
+
+#testimonial::before {
+    content: "\201C";                     /* "“" generated quotation mark */
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--lodge-gold);
+    line-height: 1;
+    float: left;
+    margin: 0.2rem 0.5rem 0 0;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+/* Footer: black colour NAME background, tan text */
+footer {
+    background-color: black;              /* colour name */
+    color: tan;                           /* colour name */
+    border-top: 4px solid var(--lodge-gold);
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+}
+
+/* Task 3.i: generate a divider before the footer address */
+footer p::before {
+    content: "\2726";                     /* "✦" generated content */
+    color: var(--lodge-gold);
+    margin-right: 0.6rem;
+}
+
+/* ============================================================
+   RESPONSIVE FALLBACK (Flexbox - Task 3.j)
+   ============================================================ */
+
+/* On narrow screens the two-column grid collapses into a
+   single Flexbox column so nothing is squeezed. */
+@media (max-width: 760px) {
+    #page {
+        display: flex;                    /* Task 3.j: Flexbox */
+        flex-direction: column;
+        padding: 1rem;
+    }
+}
